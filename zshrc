@@ -8,7 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="alexey"
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -52,6 +52,9 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH="/Users/alexey/.rvm/gems/ruby-1.9.3-p484/bin:/Users/alexey/.rvm/gems/ruby-1.9.3-p484@global/bin:/Users/alexey/.rvm/rubies/ruby-1.9.3-p484/bin:/Applications/IntelliJ IDEA 13.app/Contents/MacOS:/Users/alexey/Library/Haskell/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Users/alexey/.rvm/bin"
+
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 setopt AUTO_CD
@@ -66,7 +69,9 @@ bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+#. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then

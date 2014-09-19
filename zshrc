@@ -45,7 +45,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git cabal brew git-flow sbt scala wd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -71,6 +71,9 @@ bindkey '^N' history-search-forward
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+alias startvm="VBoxManage startvm $(VBoxManage list vms | grep dev_vagrant_default | sed 's/\"\([^"]*\).*/\1/') --type headless"
+alias fuck='sudo $(fc -ln -1)'
+alias please=sudo
 #. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Preferred editor for local and remote sessions

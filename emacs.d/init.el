@@ -4,6 +4,10 @@
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
+;;FIX PATH FOR OSX
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 ;;APPEARANCE
 
 ;; THEMES
@@ -63,7 +67,7 @@
   '(progn
      ;(setq ido-ignore-buffers (append ido-ignore-buffer '("\\` " "\\`\\*.*\\*" "_region_")))
      (setq ido-ignore-directories (append ido-ignore-directories '("^auto/$" "\\.prv/" "_region_")))
-     (setq ido-ignore-files (append ido-ignore-files '("^auto/$" "_region_" "Minibuf" "DS_Store")))
+     (setq ido-ignore-files (append ido-ignore-files '("^auto/$" "_region_" "Minibuf" "DS_Store", "TAGS")))
      (fset 'ido-directory-too-big-p #'ignore)))
 
 (ido-mode 1)
@@ -73,8 +77,8 @@
 (yas-global-mode 1)
 
 ;;HASKELL
-(setenv "PATH" (concat "~/Library/Haskell/bin:" (getenv "PATH")))
-(add-to-list 'exec-path "~/Library/Haskell/bin")
+(setenv "PATH" (concat "/Users/alexey/Library/Haskell/bin:" (getenv "PATH")))
+(add-to-list 'exec-path "/Users/alexey/Library/Haskell/bin")
 
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'turn-on-hi2)
@@ -104,6 +108,12 @@
   (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
   (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
   (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
+  (define-key haskell-mode-map (kbd "C-g t") 'ghc-insert-template-or-signature)
+  (define-key haskell-mode-map (kbd "C-g i") 'ghc-try-initial-code-from-signature)
+  (define-key haskell-mode-map (kbd "C-g a") 'ghc-auto)
+  (define-key haskell-mode-map (kbd "C-g s") 'ghc-case-split)
+  (define-key haskell-mode-map (kbd "C-g SPC") 'ghc-check-insert-from-warning)
+  (define-key haskell-mode-map (kbd "M-<f9>") 'haskell-compile)
   (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)))
 (eval-after-load 'haskell-cabal '(progn
   (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)

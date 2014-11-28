@@ -51,9 +51,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/Users/alexey/.rvm/gems/ruby-1.9.3-p484/bin:/Users/alexey/.rvm/gems/ruby-1.9.3-p484@global/bin:/Users/alexey/.rvm/rubies/ruby-1.9.3-p484/bin:/Applications/IntelliJ IDEA 13.app/Contents/MacOS:/Users/alexey/Library/Haskell/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Users/alexey/.rvm/bin"
+export PATH="$HOME/.rvm/gems/ruby-1.9.3-p484/bin:$HOME/.rvm/gems/ruby-1.9.3-p484@global/bin:$HOME/.rvm/rubies/ruby-1.9.3-p484/bin:/Applications/IntelliJ IDEA 13.app/Contents/MacOS:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/.rvm/bin"
 
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

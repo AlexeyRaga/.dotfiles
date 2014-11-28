@@ -40,8 +40,11 @@
 (global-set-key (kbd "M-<f12>") 'next-buffer)
 (global-set-key (kbd "<f11>") 'bs-cycle-previous)
 
-(require 'sr-speedbar)
-(global-set-key (kbd "<f2>") 'sr-speedbar-toggle)
+(require 'neotree)
+(global-set-key [f2] 'neotree-toggle)
+
+;(require 'sr-speedbar)
+;(global-set-key (kbd "<f2>") 'sr-speedbar-toggle)
 
 ;; IDO
 (mapc (lambda (ext)
@@ -129,6 +132,7 @@
 (autoload 'ghc-init "ghc" nil t)
 (autoload 'ghc-debug "ghc" nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
 (require 'company)
 (add-hook 'haskell-mode-hook 'company-mode)

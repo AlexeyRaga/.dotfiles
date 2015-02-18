@@ -43,21 +43,35 @@
 (require 'neotree)
 (global-set-key [f2] 'neotree-toggle)
 
+
 ;(require 'sr-speedbar)
 ;(global-set-key (kbd "<f2>") 'sr-speedbar-toggle)
+
+(require 'grizzl)
+(require 'projectile)
+(projectile-global-mode)
+(setq projectile-completion-system 'grizzl)
+(setq projectile-enable-caching t)
+;; Press Command-p for fuzzy find in project
+(global-set-key (kbd "s-p") 'projectile-find-file)
+;; Press Command-b for fuzzy switch buffer
+;(global-set-key (kbd "s-b") 'projectile-switch-to-buffer)
+
+(require 'project-explorer)
+(setq-default pe/width 20)
+(add-hook 'project-explorer-mode-hook 'hl-line-mode)
 
 ;; IDO
 (mapc (lambda (ext)
         (push ext completion-ignored-extensions))
-      '(
-	".dat" ".bak" ".zip" ".gz" ".dmg" ".apk" ".bz2" ".rar" ".tar"
+      '(".dat" ".bak" ".zip" ".gz" ".dmg" ".apk" ".bz2" ".rar" ".tar"
 	".pdf" ".mobi" ".epub"
-        ".dvi" ".djvu" ".ps"
-        ".mov" ".mp4" ".ogv" ".mp3" ".ogg"
-        ".doc" ".docx" ".ods" ".odt" ".pps" ".ppt" ".pptx" ".xls" ".xslx"
+	".dvi" ".djvu" ".ps"
+	".mov" ".mp4" ".ogv" ".mp3" ".ogg"
+	".doc" ".docx" ".ods" ".odt" ".pps" ".ppt" ".pptx" ".xls" ".xslx"
 	".class" ".hi" ".dyn_hi" ".p_hi" ".o"
 	".DC_Store"
-        ))
+       ))
 
 (setq ido-enable-flex-matching t
       ido-enable-regexp t
@@ -76,8 +90,8 @@
 (ido-mode 1)
 
 ;;SNIPPENTS
-(require 'yasnippet)
-(yas-global-mode 1)
+;(require 'yasnippet)
+;(yas-global-mode 1)
 
 ;;HASKELL
 (setenv "PATH" (concat "/Users/alexey/Library/Haskell/bin:" (getenv "PATH")))
@@ -99,9 +113,14 @@
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-process-type (quote cabal-repl))
  '(haskell-tags-on-save t)
+ '(line-number-mode nil)
  '(org-CUA-compatible nil)
  '(org-replace-disputed-keys nil)
  '(recentf-mode t)
+ '(safe-local-variable-values
+   (quote
+    ((haskell-process-use-ghci . t)
+     (haskell-indent-spaces . 4))))
  '(shift-select-mode nil))
 
 (eval-after-load 'haskell-mode '(progn
@@ -110,6 +129,7 @@
   (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
   (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
   (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
+  (define-key haskell-mode-map (kbd "C-c C-n C-r") 'haskell-process-load-or-reload)
   (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
   (define-key haskell-mode-map (kbd "C-g t") 'ghc-insert-template-or-signature)
   (define-key haskell-mode-map (kbd "C-g i") 'ghc-try-initial-code-from-signature)
@@ -117,6 +137,7 @@
   (define-key haskell-mode-map (kbd "C-g s") 'ghc-case-split)
   (define-key haskell-mode-map (kbd "C-g SPC") 'ghc-check-insert-from-warning)
   (define-key haskell-mode-map (kbd "M-<f9>") 'haskell-compile)
+  (define-key haskell-mode-map (kbd "C-c /") 'comment-or-uncomment-region)
   (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)))
 (eval-after-load 'haskell-cabal '(progn
   (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
@@ -146,6 +167,11 @@
 ;;(yas/load-directory "~/.emacs.d/el-get/haskell-mode/snippets/haskell-mode")
 
 ;;(setq-default yas-prompt-functions '(yas-ido-prompt yas-dropdown-prompt))
+
+(require 'drag-stuff)
+(drag-stuff-mode t)
+(global-set-key (kbd "<M-S-up>") 'drag-stuff-up)
+(global-set-key (kbd "<M-S-down>") 'drag-stuff-down)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

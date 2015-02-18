@@ -74,6 +74,15 @@ export LANG=en_US.UTF-8
 alias startvm="VBoxManage startvm $(VBoxManage list vms | grep dev_vagrant_default | sed 's/\"\([^"]*\).*/\1/') --type headless"
 alias fuck='sudo $(fc -ln -1)'
 alias please=sudo
+
+c1() {
+  if [[ $# -gt 0 ]]; then
+     dsh -g c1 -c $*
+  else
+     echo "Usage: c1 <command>"
+  fi     
+}
+
 #. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Preferred editor for local and remote sessions

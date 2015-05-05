@@ -51,7 +51,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$HOME/.rvm/gems/ruby-1.9.3-p484/bin:$HOME/.rvm/gems/ruby-1.9.3-p484@global/bin:$HOME/.rvm/rubies/ruby-1.9.3-p484/bin:/Applications/IntelliJ IDEA 13.app/Contents/MacOS:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/.rvm/bin"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/.rvm/bin"
 
 export PATH=$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
@@ -60,7 +60,7 @@ export PATH=$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:$PATH
 setopt AUTO_CD
 
 export EDITOR="vim"
-bindkey -v 
+bindkey -v
 
 # vi style incremental search
 bindkey '^R' history-incremental-search-backward
@@ -80,7 +80,7 @@ c1() {
      dsh -g c1 -c $*
   else
      echo "Usage: c1 <command>"
-  fi     
+  fi
 }
 
 #. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh

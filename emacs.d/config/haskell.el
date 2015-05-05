@@ -177,7 +177,7 @@ the cursor position happened."
 ;haskell-mode-stylish-buffer
 
 (define-key interactive-haskell-mode-map [f5] 'haskell-process-load-or-reload)
-(define-key interactive-haskell-mode-map [f12] 'haskell-process-reload-devel-main)
+(define-key interactive-haskell-mode-map (kbd "C-<f12>") 'haskell-process-reload-devel-main)
 (define-key interactive-haskell-mode-map (kbd "M-,") 'haskell-who-calls)
 (define-key interactive-haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
 (define-key interactive-haskell-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
@@ -209,7 +209,7 @@ the cursor position happened."
 
 (define-key haskell-interactive-mode-map (kbd "C-c C-v") 'haskell-interactive-toggle-print-mode)
 (define-key haskell-interactive-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
-(define-key haskell-interactive-mode-map [f12] 'haskell-process-reload-devel-main)
+(define-key haskell-interactive-mode-map (kbd "C-<f12>") 'haskell-process-reload-devel-main)
 (define-key haskell-interactive-mode-map (kbd "C-<left>") 'haskell-interactive-mode-error-backward)
 (define-key haskell-interactive-mode-map (kbd "C-<right>") 'haskell-interactive-mode-error-forward)
 (define-key haskell-interactive-mode-map (kbd "C-c c") 'haskell-process-cabal)

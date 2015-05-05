@@ -69,4 +69,9 @@
 
 ;;; YaSnipet
 ;(require 'yasnippet)
-;(yas-global-mode 1)
+;(yas-global-mode 1
+
+(global-set-key (kbd "s-<f12>") 'bs-show)
+(global-set-key (kbd "<f12>") 'bs-cycle-next)
+(global-set-key (kbd "M-<f12>") 'next-buffer)
+(global-set-key (kbd "<f11>") 'bs-cycle-previous)

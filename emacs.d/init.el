@@ -26,6 +26,7 @@
     occur
     paredit
     registers
+    neotree
 ;    weechat
 ;    weechat-private
     )

@@ -23,6 +23,7 @@
     hindent
     magit
     multiple-cursors
+    neotree
     nyan-mode
     org-present
     ox-asciidoc

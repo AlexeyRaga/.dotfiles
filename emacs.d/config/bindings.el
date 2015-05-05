@@ -96,3 +96,7 @@
 
 ;;; Expand Region
 (global-set-key (kbd "C-=") 'er/expand-region)
+
+;;; global
+(global-set-key (kbd "C-x |") 'split-window-right)
+(global-set-key (kbd "C-x _") 'split-window-below)

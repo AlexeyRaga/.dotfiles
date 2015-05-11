@@ -13,7 +13,7 @@ Clone the repo into the home folder and link whatever is needed, for example ema
 Executing `setup.sh` _should_ work and create all the environment.
 Existing configurations for `Emacs`, `Vim`, `tmux` etc. should be backed up by the setup process 'automagically'.
 
-If `oh-my-zsh` is installed, then `alexey.zsh-theme` will be setup.
+If `oh-my-zsh` is installed, then `alexey.zsh-theme` will be installed.
 
 *Note*: `setup.sh` is untested, so take it as an example and fix if it is broken ;)
 

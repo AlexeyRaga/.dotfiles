@@ -1,12 +1,19 @@
 # Dot Files
 
-My dotfiles
+My dotfiles (note for future myself)
 
 ### Install
 
 Clone the repo into the home folder and link whatever is needed, for example emacs:
 
 `ln -s ~/.dotfiles/emacs.d ~/.emacs.d`
+
+### Install all
+
+Executing `setup.sh` _should_ work and create all the environment.
+Existing configurations for `Emacs`, `Vim`, `tmux` etc. should be backed up by the setup process 'automagically'.
+
+If `oh-my-zsh` is installed, then `alexey.zsh-theme` will be setup.
 
 ### Emacs and Haskell
 

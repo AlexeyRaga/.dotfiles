@@ -15,6 +15,8 @@ Existing configurations for `Emacs`, `Vim`, `tmux` etc. should be backed up by t
 
 If `oh-my-zsh` is installed, then `alexey.zsh-theme` will be setup.
 
+*Note*: `setup.sh` is untested, so take it as an example and fix if it is broken ;)
+
 ### Emacs and Haskell
 
 Assuming Haskell Platform (GHC/GHCi/Cabal/Cabal-Install) are installed,

@@ -4,8 +4,9 @@
 (require 'cl)
 
 ;; Add some stuff to PATH and exec-path
-(setenv "PATH" (concat (getenv "PATH") ":~/Library/Haskell/bin"))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:~/Library/Haskell/bin"))
 (setq exec-path (append exec-path '("~/Library/Haskell/bin")))
+(setq exec-path (append exec-path '("/usr/local/bin")))
 
 (setenv "PATH" (concat (getenv "PATH") ":~/.emacs.d/vendor/structured-haskell-mode/.cabal-sandbox/bin"))
 (setq exec-path (append exec-path '("~/.emacs.d/vendor/structured-haskell-mode/.cabal-sandbox/bin")))
@@ -42,6 +43,9 @@
 (powerline-default-theme)
 
 (setq ring-bell-function 'ignore)
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;; why not?
 ;(nyan-mode 1)

@@ -15,6 +15,7 @@
     diminish
     dired-details
     discover
+    exec-path-from-shell
     expand-region
     find-file-in-project
     gist

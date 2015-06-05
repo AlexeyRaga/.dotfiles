@@ -71,6 +71,8 @@ bindkey '^N' history-search-forward
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+alias hstest="fswatch -o ./ | xargs -n 1 -I{} doctest -isrc -Wall -fno-warn-type-defaults "
+
 alias startvm="VBoxManage startvm $(VBoxManage list vms | grep dev_vagrant_default | sed 's/\"\([^"]*\).*/\1/') --type headless"
 alias fuck='sudo $(fc -ln -1)'
 alias please=sudo

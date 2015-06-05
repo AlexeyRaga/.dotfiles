@@ -106,3 +106,6 @@ c1() {
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# added by travis gem
+[ -f /Users/alexey/.travis/travis.sh ] && source /Users/alexey/.travis/travis.sh

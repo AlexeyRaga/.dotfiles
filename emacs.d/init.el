@@ -14,6 +14,7 @@
 (defvar configs
   '(
     packages
+    linum
     global
     path
     backup

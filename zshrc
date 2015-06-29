@@ -52,8 +52,13 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/.rvm/bin"
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
-export PATH=$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:$PATH
+# export GHC_DOT_APP="/Applications/ghc-7.10.1.app"
+export GHC_DOT_APP="/Applications/ghc-7.8.4.app"
+if [ -d "$GHC_DOT_APP" ]; then
+  export PATH="${HOME}/Library/Haskell/bin:${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
+fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

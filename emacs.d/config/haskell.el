@@ -124,7 +124,7 @@ the cursor position happened."
 (custom-set-variables
  '(haskell-process-type 'cabal-repl)
  '(haskell-process-args-cabal-repl
-   '("--ghc-option=-ferror-spans" "--with-ghc=ghci"))
+   '("--ghc-option=-ferror-spans"))
  '(haskell-notify-p t)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
@@ -144,7 +144,7 @@ the cursor position happened."
  '(haskell-process-path-ghci "ghci")
  '(haskell-process-args-ghci '("-ferror-spans"))
  '(haskell-process-args-cabal-repl
-   '("--ghc-option=-ferror-spans" "--with-ghc=ghci"))
+   '("--ghc-option=-ferror-spans"))
  '(haskell-process-generate-tags nil)
  '(haskell-complete-module-preferred
    '("Data.ByteString"
@@ -199,7 +199,8 @@ the cursor position happened."
 (define-key haskell-mode-map (kbd "<space>") 'haskell-mode-contextual-space)
 
 (define-key haskell-mode-map (kbd "C-c M-i") 'haskell-mode-stylish-buffer)
-(define-key haskell-mode-map (kbd "C-M-t") 'ghc-insert-template-or-signature)
+(define-key haskell-mode-map (kbd "C-t") 'ghc-show-type)
+(define-key haskell-mode-map (kbd "C-S-t") 'ghc-show-info)
 (define-key haskell-mode-map (kbd "C-c C-M-i") 'ghc-try-initial-code-from-signature)
 
 (define-key haskell-cabal-mode-map (kbd "C-`") 'haskell-interactive-bring)

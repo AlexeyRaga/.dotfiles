@@ -6,6 +6,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="alexey"
+setopt HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -62,6 +63,9 @@ fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+eval "$(thefuck-alias)"
+eval "$(thefuck-alias please)"
+
 setopt AUTO_CD
 
 export EDITOR="vim"
@@ -79,8 +83,6 @@ export LANG=en_US.UTF-8
 alias hstest="fswatch -o ./ | xargs -n 1 -I{} doctest -isrc -Wall -fno-warn-type-defaults "
 
 alias startvm="VBoxManage startvm $(VBoxManage list vms | grep dev_vagrant_default | sed 's/\"\([^"]*\).*/\1/') --type headless"
-alias fuck='sudo $(fc -ln -1)'
-alias please=sudo
 
 c1() {
   if [[ $# -gt 0 ]]; then

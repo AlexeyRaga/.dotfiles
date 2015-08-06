@@ -4,3 +4,4 @@ if [ -d "$GHC_DOT_APP" ]; then
   export PATH="${HOME}/Library/Haskell/bin:${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
 fi
 
+eval "$(thefuck-alias)"

@@ -27,6 +27,7 @@
     magit
     occur
     paredit
+    purescript
     registers
     neotree
 ;    weechat

@@ -18,6 +18,7 @@
     exec-path-from-shell
     expand-region
     find-file-in-project
+    flycheck
     gist
     haskell-mode
     hi2
@@ -34,6 +35,7 @@
     paredit
     powerline
     prodigy
+    purescript-mode
     rainbow-delimiters
     shm
     smex

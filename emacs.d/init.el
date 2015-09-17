@@ -4,11 +4,11 @@
 (require 'cl)
 
 ;; Add some stuff to PATH and exec-path
-(setenv "PATH" (concat (getenv "PATH") ":~/Library/Haskell/bin"))
-(setq exec-path (append exec-path '("~/Library/Haskell/bin")))
+(setenv "PATH" (concat (getenv "PATH") ":~/.cabal/bin"))
+(setq exec-path (append exec-path '("~/.cabal/bin")))
 
-(setenv "PATH" (concat (getenv "PATH") ":~/.emacs.d/vendor/structured-haskell-mode/.cabal-sandbox/bin"))
-(setq exec-path (append exec-path '("~/.emacs.d/vendor/structured-haskell-mode/.cabal-sandbox/bin")))
+;(setenv "PATH" (concat (getenv "PATH") ":~/.emacs.d/vendor/structured-haskell-mode/.cabal-sandbox/bin"))
+;(setq exec-path (append exec-path '("~/.emacs.d/vendor/structured-haskell-mode/.cabal-sandbox/bin")))
 
 ;; Configs to load
 (defvar configs

@@ -7,8 +7,8 @@
   '(diminish 'paredit-mode))
 
 (require 'magit)
-(eval-after-load "magit"
-  '(diminish 'magit-auto-revert-mode))
+;(eval-after-load "magit"
+;  '(diminish 'magit-auto-revert-mode))
 
 ;; Major modes
 

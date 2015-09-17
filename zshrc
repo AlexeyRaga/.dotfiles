@@ -55,10 +55,10 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/.rvm/bin"
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
-# export GHC_DOT_APP="/Applications/ghc-7.10.1.app"
-export GHC_DOT_APP="/Applications/ghc-7.8.4.app"
+export GHC_DOT_APP="/Applications/ghc-7.10.2.app"
+# export GHC_DOT_APP="/Applications/ghc-7.8.4.app"
 if [ -d "$GHC_DOT_APP" ]; then
-  export PATH="${HOME}/Library/Haskell/bin:${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
+  export PATH="${HOME}/.cabal/bin:${GHC_DOT_APP}/Contents/bin:${PATH}"
 fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -92,6 +92,8 @@ c1() {
   fi
 }
 
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
 #. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Preferred editor for local and remote sessions
@@ -116,5 +118,3 @@ c1() {
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# added by travis gem
-[ -f /Users/alexey/.travis/travis.sh ] && source /Users/alexey/.travis/travis.sh

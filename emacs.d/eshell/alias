@@ -1,2 +1,0 @@
-alias hstestc fswatch -o ./ | xargs -n 1 -I{} doctest -isrc -Wall -fno-warn-type-defaults $*
-alias hstest doctest -isrc -Wall -fno-warn-type-defaults $*

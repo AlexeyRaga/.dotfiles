@@ -16,7 +16,6 @@ function link {
 
 pushd $DIR
 
-link "emacs.d", "~/.emacs.d"
 link "dsh", "~/.dsh"
 link "vim", "~/.vim"
 link "config/powerline", "~/.config/powerline"
@@ -24,6 +23,7 @@ link "vimrc", "~/.vimrc"
 link "tmux.conf", "~/.tmux.conf"
 link "zshrc", "~/.zshrc"
 link "ghci", "~/.ghci"
+link "spacemacs", "~/.spacemacs"
 
 if[ -d "~/.oh-my-zsh/themes" ] ; then
 	ln -s "oh-my-zsh/themes/alexey.zsh-theme" "~/.oh-my-zsh/themes/alexey.zsh-theme" ;

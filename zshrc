@@ -63,9 +63,6 @@ fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-eval "$(thefuck-alias)"
-eval "$(thefuck-alias please)"
-
 setopt AUTO_CD
 
 export EDITOR="vim"

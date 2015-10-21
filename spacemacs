@@ -209,6 +209,8 @@ layers configuration. You are free to put any user code."
   (custom-set-faces
     '(shm-current-face ((t (:background "#232528"))))
   )
+  (global-set-key (kbd "M-o") 'ace-window)
+  (setq aw-keys '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9))
 )
 
 (setq ns-use-srgb-colorspace nil)

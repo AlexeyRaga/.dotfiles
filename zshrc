@@ -53,7 +53,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/.rvm/bin"
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=${HOME}/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 export GHC_DOT_APP="/Applications/ghc-7.10.2.app"
 # export GHC_DOT_APP="/Applications/ghc-7.8.4.app"
@@ -77,8 +77,10 @@ bindkey '^N' history-search-forward
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+alias xemacs="open -a /Applications/Emacs.app"
+alias em="open -a /Applications/Emacs.app"
+alias sm="open -a /Applications/Emacs.app"
 alias hstest="fswatch -o ./ | xargs -n 1 -I{} doctest -isrc -Wall -fno-warn-type-defaults "
-
 alias startvm="VBoxManage startvm $(VBoxManage list vms | grep dev_vagrant_default | sed 's/\"\([^"]*\).*/\1/') --type headless"
 
 c1() {
@@ -115,3 +117,4 @@ code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+eval "$(jenv init -)"

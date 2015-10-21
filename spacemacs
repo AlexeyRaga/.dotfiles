@@ -207,7 +207,7 @@ user code."
 layers configuration. You are free to put any user code."
 
   (custom-set-faces
-    '(shm-current-face ((t (:background "#323232"))))
+    '(shm-current-face ((t (:background "#232528"))))
   )
 )
 

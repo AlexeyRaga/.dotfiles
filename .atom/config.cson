@@ -1,0 +1,16 @@
+"*":
+  core: {}
+  editor:
+    fontSize: 12
+    invisibles: {}
+  "exception-reporting":
+    userId: "99a7eb74-0e1d-3f3d-de18-0fb57ae01092"
+  "git-plus": {}
+  "haskell-ghc-mod":
+    "ghc-mod-path": "ghc-mod"
+    ghcModPath: "/Users/alexey/.cabal/bin/ghc-mod"
+    ghcModiPath: "/Users/alexey/.cabal/bin/ghc-modi"
+  "ide-haskell": {}
+  "ide-purescript": {}
+  welcome:
+    showOnStartup: false

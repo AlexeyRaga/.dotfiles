@@ -19,6 +19,7 @@
        "**/*.hi": true,
        "**/*.class": true,
        "**/*.o": true,
-       "**/project/project/*": true
+       "**/project/project/*": true,
+       "**/.stack-work/*": true
    }
 }

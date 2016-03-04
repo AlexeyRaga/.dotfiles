@@ -1,0 +1,24 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "gitProjectManager.baseProjectsFolders": [
+        "/Users/alexey/src"
+    ],
+    
+    "search.excludeFolders": [
+        ".git",
+        "node_modules",
+        "bower_components",
+        "target",
+        ".stack-work",
+        ".vscode"
+   ],
+   
+   "files.exclude": {
+       "**/.git": true,
+       "**/.DS_Store": true,
+       "**/*.hi": true,
+       "**/*.class": true,
+       "**/*.o": true,
+       "**/project/project/*": true
+   }
+}

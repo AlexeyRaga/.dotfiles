@@ -11,7 +11,12 @@
   'operatorChar': '[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]'
   'operator': '[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+'
   'operatorFun': '(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\))'
-  'character': '(?:[ -\\[\\]-~]|(\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&]))|(\\\\o[0-7]+)|(\\\\x[0-9A-Fa-f]+)|(\\^[A-Z@\\[\\]\\\\\\^_]))'
+  'basicChar': '[\\ -\\[\\]-~]'
+  'escapeChar': '\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&])'
+  'octalChar': '(?:\\\\o[0-7]+)'
+  'hexChar': '(?:\\\\x[0-9A-Fa-f]+)'
+  'controlChar': '(?:\\^[A-Z@\\[\\]\\\\\\^_])'
+  'character': '(?:[\\ -\\[\\]-~]|\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&])|(?:\\\\o[0-7]+)|(?:\\\\x[0-9A-Fa-f]+)|(?:\\^[A-Z@\\[\\]\\\\\\^_]))'
   'classConstraint': '(?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s+)(?:(?<classConstraint>(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)(?:\\s*(?:\\s+)\\s*\\g<classConstraint>)?)))'
   'functionTypeDeclaration': '(?:(?:(?<functionTypeDeclaration>(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<functionTypeDeclaration>)?))(?:\\s*(::|∷)))'
   'ctorTypeDeclaration': '(?:(?:(?<ctorTypeDeclaration>(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<ctorTypeDeclaration>)?))(?:\\s*(::|∷)))'
@@ -395,21 +400,6 @@
       }
       {
         'name': 'string.quoted.double.haskell'
-        'match': '(")(?>(?:[^"\\\\]+|\\\\.)*)(")'
-        'captures':
-          '0':
-            'patterns': [
-              {
-                'include': '#characters'
-              }
-            ]
-          '1':
-            'name': 'punctuation.definition.string.begin.haskell'
-          '2':
-            'name': 'punctuation.definition.string.end.haskell'
-      }
-      {
-        'name': 'string.quoted.double.haskell'
         'begin': '"'
         'end': '"'
         'beginCaptures':
@@ -446,7 +436,7 @@
       }
       {
         'name': 'string.quoted.single.haskell'
-        'match': '(\')((?:[ -\\[\\]-~]|(\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&]))|(\\\\o[0-7]+)|(\\\\x[0-9A-Fa-f]+)|(\\^[A-Z@\\[\\]\\\\\\^_])))(\')'
+        'match': '(\')((?:[\\ -\\[\\]-~]|\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&])|(?:\\\\o[0-7]+)|(?:\\\\x[0-9A-Fa-f]+)|(?:\\^[A-Z@\\[\\]\\\\\\^_])))(\')'
         'captures':
           '1':
             'name': 'punctuation.definition.string.begin.haskell'
@@ -456,11 +446,41 @@
                 'include': '#characters'
               }
             ]
-          '7':
+          '3':
             'name': 'punctuation.definition.string.end.haskell'
       }
       {
         'include': '#function_type_declaration'
+      }
+      {
+        'match': '\\((?<paren>(?:[^()]|\\(\\g<paren>\\))*)(::|∷)(?<paren2>(?:[^()]|\\(\\g<paren2>\\))*)\\)'
+        'captures':
+          '1':
+            'patterns': [
+              {
+                'include': 'source.haskell'
+              }
+            ]
+          '2':
+            'name': 'keyword.other.double-colon.haskell'
+          '3':
+            'patterns': [
+              {
+                'include': '#type_signature'
+              }
+            ]
+      }
+      {
+        'match': '(::|∷)(.*)'
+        'captures':
+          '1':
+            'name': 'keyword.other.double-colon.haskell'
+          '2':
+            'patterns': [
+              {
+                'include': '#type_signature'
+              }
+            ]
       }
       {
         'match': '\\b(Just|Left|Right|Nothing|True|False|LT|EQ|GT)(?!\')\\b'
@@ -587,16 +607,20 @@
   'characters':
     'patterns': [
       {
-        'match': '(?:[ -\\[\\]-~]|(\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&]))|(\\\\o[0-7]+)|(\\\\x[0-9A-Fa-f]+)|(\\^[A-Z@\\[\\]\\\\\\^_]))'
-        'captures':
-          '1':
-            'name': 'constant.character.escape.haskell'
-          '2':
-            'name': 'constant.character.escape.octal.haskell'
-          '3':
-            'name': 'constant.character.escape.hexadecimal.haskell'
-          '4':
-            'name': 'constant.character.escape.control.haskell'
+        'match': '\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&])'
+        'name': 'constant.character.escape.haskell'
+      }
+      {
+        'match': '(?:\\\\o[0-7]+)'
+        'name': 'constant.character.escape.octal.haskell'
+      }
+      {
+        'match': '(?:\\\\x[0-9A-Fa-f]+)'
+        'name': 'constant.character.escape.hexadecimal.haskell'
+      }
+      {
+        'match': 'controlChar'
+        'name': 'constant.character.escape.control.haskell'
       }
     ]
   'infix_op':

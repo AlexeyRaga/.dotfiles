@@ -49,42 +49,45 @@ class EditorControl
       return if @lastMouseBufferPt?.isEqual(bufferPt)
       @lastMouseBufferPt = bufferPt
 
-      @clearExprTypeTimeout()
+      clearTimeout @exprTypeTimeout if @exprTypeTimeout?
       @exprTypeTimeout = setTimeout (=> @shouldShowTooltip bufferPt),
         atom.config.get('ide-haskell.expressionTypeInterval')
     @disposables.add editorElement.rootElement, 'mouseout', '.scroll-view', (e) =>
-      @clearExprTypeTimeout()
+      clearTimeout @exprTypeTimeout if @exprTypeTimeout?
 
-    @disposables.add @editor.onDidChangeCursorPosition ({newBufferPosition}) =>
-      switch atom.config.get('ide-haskell.onCursorMove')
-        when 'Show Tooltip'
-          @clearExprTypeTimeout()
-          unless @showCheckResult newBufferPosition, false, 'keyboard'
+    @disposables.add @editor.onDidChangeSelectionRange ({newBufferRange}) =>
+      clearTimeout @selTimeout if @selTimeout?
+      if newBufferRange.isEmpty()
+        @hideTooltip eventType: 'selection'
+        switch atom.config.get('ide-haskell.onCursorMove')
+          when 'Show Tooltip'
+            clearTimeout @exprTypeTimeout if @exprTypeTimeout?
+            unless @showCheckResult newBufferRange.start, false, 'keyboard'
+              @hideTooltip()
+          when 'Hide Tooltip'
+            clearTimeout @exprTypeTimeout if @exprTypeTimeout?
             @hideTooltip()
-        when 'Hide Tooltip'
-          @clearExprTypeTimeout()
-          @hideTooltip()
+      else
+        @selTimeout = setTimeout (=> @shouldShowTooltip newBufferRange.start, 'selection'),
+          atom.config.get('ide-haskell.expressionTypeInterval')
 
   deactivate: ->
-    @clearExprTypeTimeout()
+    clearTimeout @exprTypeTimeout if @exprTypeTimeout?
+    clearTimeout @selTimeout if @selTimeout?
     @hideTooltip()
     @disposables.dispose()
     @disposables = null
     @editor = null
     @lastMouseBufferPt = null
 
-  # helper function to hide tooltip and stop timeout
-  clearExprTypeTimeout: ->
-    if @exprTypeTimeout?
-      clearTimeout @exprTypeTimeout
-      @exprTypeTimeout = null
-
   updateResults: (res, types) =>
     if types?
       for t in types
-        m.destroy() for m in @editor.findMarkers {type: 'check-result', severity: t}
+        for m in @editor.findMarkers {type: 'check-result', severity: t, editor: @editor.id}
+          m.destroy()
     else
-      m.destroy() for m in @editor.findMarkers {type: 'check-result'}
+      for m in @editor.findMarkers {type: 'check-result', editor: @editor.id}
+        m.destroy()
     @markerFromCheckResult(r) for r in res
 
   markerFromCheckResult: ({uri, severity, message, position}) ->
@@ -96,6 +99,7 @@ class EditorControl
       type: 'check-result'
       severity: severity
       desc: message
+      editor: @editor.id
 
     @decorateMarker(marker)
 
@@ -118,18 +122,20 @@ class EditorControl
   onDidStopChanging: (callback) ->
     @emitter.on 'did-stop-changing', callback
 
-  shouldShowTooltip: (pos) ->
-    return if @showCheckResult pos
+  shouldShowTooltip: (pos, eventType = 'mouse') ->
+    return if @showCheckResult pos, false, eventType
 
     if pos.row < 0 or
        pos.row >= @editor.getLineCount() or
        pos.isEqual @editor.bufferRangeForBufferRow(pos.row).end
-      @hideTooltip eventType: 'mouse'
+      @hideTooltip {eventType}
     else
-      @emitter.emit 'should-show-tooltip', {@editor, pos}
+      @emitter.emit 'should-show-tooltip', {@editor, pos, eventType}
 
-  showTooltip: (pos, range, text, detail = {}) ->
+  showTooltip: (pos, range, text, detail) ->
     return unless @editor?
+
+    throw new Error('eventType not set') unless detail.eventType
 
     if range.isEqual(@tooltipHighlightRange)
       return
@@ -138,12 +144,12 @@ class EditorControl
     if detail.eventType is 'mouse'
       unless range.containsPoint(@lastMouseBufferPt)
         return
+    if detail.eventType is 'selection'
+      lastSel = @editor.getLastSelection()
+      unless range.containsRange(lastSel.getBufferRange()) and not lastSel.isEmpty()
+        return
     @tooltipHighlightRange = range
-    @markerBufferRange = range
-    markerPos =
-      switch detail.eventType
-        when 'keyboard' then pos
-        else range.start
+    markerPos = range.start
     detail.type = 'tooltip'
     tooltipMarker = @editor.markBufferPosition markerPos, detail
     highlightMarker = @editor.markBufferRange range, detail
@@ -169,33 +175,41 @@ class EditorControl
           .filter (sel) ->
             sel.containsPoint pos
         crange = selRange ? Range.fromPointWithDelta(pos, 0, 0)
-      when 'keyboard'
+      when 'keyboard', 'selection'
         crange = @editor.getLastSelection().getBufferRange()
         pos = crange.start
       else
         throw new Error "unknown event type #{eventType}"
 
-    return {crange, pos}
+    return {crange, pos, eventType}
 
-  findCheckResultMarkers: (pos, gutter, keyboard) ->
+  findCheckResultMarkers: (pos, gutter, eventType) ->
     if gutter
-      @editor.findMarkers {type: 'check-result', startBufferRow: pos.row}
-    else if keyboard
-      @editor.findMarkers {type: 'check-result', containsRange: Range.fromPointWithDelta pos, 0, 1}
+      @editor.findMarkers {type: 'check-result', startBufferRow: pos.row, editor: @editor.id}
     else
-      @editor.findMarkers {type: 'check-result', containsPoint: pos}
+      switch eventType
+        when 'keyboard'
+          @editor.findMarkers
+            type: 'check-result'
+            editor: @editor.id
+            containsRange: Range.fromPointWithDelta pos, 0, 1
+        when 'mouse'
+          @editor.findMarkers {type: 'check-result', editor: @editor.id, containsPoint: pos}
+        else
+          []
 
   # show check result when mouse over gutter icon
   showCheckResult: (pos, gutter, eventType = 'mouse') ->
-    markers = @findCheckResultMarkers pos, gutter, eventType is 'keyboard'
+    markers = @findCheckResultMarkers pos, gutter, eventType
     [marker] = markers
 
     unless marker?
       @hideTooltip subtype: 'check-result'
       return false
 
-    text = (markers.map (marker) ->
-      marker.getProperties().desc).join('\n\n')
+    text =
+      markers.map (marker) ->
+        marker.getProperties().desc
 
     if gutter
       @showTooltip pos, new Range(pos, pos), text, {eventType, subtype: 'check-result'}

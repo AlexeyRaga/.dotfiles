@@ -46,7 +46,7 @@ class UPIInstance
   messages: Array of Object
     uri: String, File URI message relates to
     position: Point, or Point-like Object, position to which message relates
-    message: String, message
+    message: String or {<text | html>, highlighter?}, message
     severity: String, one of 'error', 'warning', 'lint', 'build',
               or user-defined, see `setMessageTypes`
   types: Array of String, containing possible message `severity`. If undefined,
@@ -100,9 +100,17 @@ class UPIInstance
   Editor event subscription. Fires when mouse cursor stopped over a symbol in
   editor.
 
-  callback: callback(editor, crange)
+  callback: callback(editor, crange, type)
     editor: TextEditor, editor that generated event
     crange: Range, cursor range that generated event.
+    type: One of 'mouse', 'selection' -- type of event that triggered this
+
+    Returns {range, text} or Promise.
+      range: Range, tooltip highlighting range
+      text: tooltip text. String or {text, highlighter} or {html}
+        text: tooltip text
+        highlighter: grammar scope that will be used to highlight tooltip text
+        html: html to be displayed in tooltip
 
   returns Disposable
   ###
@@ -112,7 +120,12 @@ class UPIInstance
         editor: editor
         pos: pos
         eventType: eventType
-        tooltip: (crange) -> callback editor, crange
+        tooltip: (crange) ->
+          res = callback editor, crange, eventType
+          if res?
+            Promise.resolve res
+          else
+            Promise.reject ignore: true
     disp
 
   ###
@@ -123,11 +136,19 @@ class UPIInstance
   eventType: one of 'context', 'keyboard' and 'mouse'
   detail: for automatic selection between 'context' and 'keyboard'.
           Ignored if 'eventType' is set.
-  tooltip: String, tooltip text
+  tooltip: function(crange)
+    crange: Range, currently selected range in editor (possibly empty)
+
+    Returns {range, text} or Promise
+      range: Range, tooltip highlighting range
+      text: tooltip text. String or {text, highlighter} or {html}
+        text: tooltip text
+        highlighter: grammar scope that will be used to highlight tooltip text
+        html: html to be displayed in tooltip
   ###
   showTooltip: ({editor, pos, eventType, detail, tooltip}) ->
     controller = @pluginManager.controller(editor)
-    @withEventRange {controller, pos, detail, eventType}, ({crange, pos}) =>
+    @withEventRange {controller, pos, detail, eventType}, ({crange, pos, eventType}) =>
       tooltip(crange).then ({range, text}) ->
         controller.showTooltip pos, range, text, {eventType, subtype: 'external'}
       .catch (status = {status: 'warning'}) =>

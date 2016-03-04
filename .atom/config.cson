@@ -12,5 +12,6 @@
     ghcModiPath: "/Users/alexey/.cabal/bin/ghc-modi"
   "ide-haskell": {}
   "ide-purescript": {}
+  "linter-hlint": {}
   welcome:
     showOnStartup: false

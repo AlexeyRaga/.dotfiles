@@ -1,3 +1,13 @@
+## 1.7.1
+* Fix string tokenization (+tests)
+* In-line type signatures
+
+## 1.7.0
+* Haskell message hint grammar
+
+## 1.6.0
+* Haskell Type Hint grammar
+
 ## 1.5.2
 * Don't confuse timecop
 

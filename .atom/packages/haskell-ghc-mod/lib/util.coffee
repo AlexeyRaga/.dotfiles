@@ -180,3 +180,29 @@ module.exports = Util =
 
 
     return vars
+
+  # A dirty hack to work with tabs
+  tabShiftForPoint: (buffer, point) ->
+    columnShift = 7 * (buffer.lineForRow(point.row).slice(0, point.column).match(/\t/g)?.length or 0)
+    new Point(point.row, point.column + columnShift)
+
+  tabShiftForRange: (buffer, range) ->
+    start = Util.tabShiftForPoint(buffer, range.start)
+    end = Util.tabShiftForPoint(buffer, range.end)
+    new Range(start, end)
+
+  tabUnshiftForPoint: (buffer, point) ->
+    line = buffer.lineForRow(point.row)
+    columnl = 0
+    columnr = point.column
+    while(columnl < columnr)
+      break unless line? and line[columnl]?
+      if line[columnl] is '\t'
+        columnr -= 7
+      columnl += 1
+    new Point(point.row, columnr)
+
+  tabUnshiftForRange: (buffer, range) ->
+    start = Util.tabUnshiftForPoint(buffer, range.start)
+    end = Util.tabUnshiftForPoint(buffer, range.end)
+    new Range(start, end)

@@ -15,7 +15,7 @@ NOTE: when using with stack, see https://github.com/atom-haskell/haskell-ghc-mod
 You need to have `ghc-mod`, `ghc-modi` (part of ghc-mod) and `hlint` executables
 installed on your system. `ghc-mod` needs to be able to find `hlint` (eiter add `hlint` directory to PATH, or install both in the same cabal sandbox).
 
-Supported `ghc-mod` versions are from 4.1.0 to 5.2.1.2, and 5.4.x. 5.3.x might work, but is not officially supported.
+Supported `ghc-mod` versions are 5.4.x. and up. Versions from 4.1 to 5.2 might work, but are deprecated. 5.3 is not supported.
 
 Quick setup is as follows:
 
@@ -29,6 +29,12 @@ After this process finishes, you'll have `ghc-mod`, `ghc-modi` and `hlint` avail
 Please note, that for ghc>=7.10 and/or cabal>=1.22, you need ghc-mod>=5.3.0.0. ghc-mod versions before 5.3.0.0 won't work.
 
 User interface is provided by [ide-haskell](https://atom.io/packages/ide-haskell)
+
+## Atom Linter package support
+
+haskell-ghc-mod can use [linter](https://atom.io/packages/linter) package instead of ide-haskell to show check and lint results. You still need ide-haskell for type/info tooltips though.
+
+To use linter, enable 'Use Linter' option in haskell-ghc-mod settings. Bear in mind, that it will disable ide-haskell markers for check/lint results. As of now, no additional checks are preformed, so linter package is not installed or disabled, you won't see check/lint results at all.
 
 ## Installation
 
@@ -78,6 +84,7 @@ You can edit Atom keybindings by opening 'Edit → Open Your Keymap'. Here is a 
   'ctrl-alt-T': 'haskell-ghc-mod:insert-type' #this is an example binding
   '': 'haskell-ghc-mod:show-info-fallback-to-type'
   '': 'haskell-ghc-mod:insert-import'
+  '': 'haskell-ghc-mod:go-to-declaration'
 
 'atom-workspace':
   '': 'haskell-ghc-mod:shutdown-backend'

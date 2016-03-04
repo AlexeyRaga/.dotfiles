@@ -60,7 +60,7 @@ class GhcModiProcess
             error.stack = (new Error).stack
             return reject error
           resolve (
-            /^ghc-mod version (\d+)\.(\d+)\.(\d+)\.(\d+)/.exec(stdout)
+            /^ghc-mod version (\d+)\.(\d+)\.(\d+)(?:\.(\d+))?/.exec(stdout)
             .slice(1, 5).map (i) -> parseInt i
             )
 
@@ -191,6 +191,7 @@ class GhcModiProcess
         {name, typeSignature, symbolType}
 
   getTypeInBuffer: (buffer, crange) =>
+    crange = Util.tabShiftForRange(buffer, crange)
     @queueCmd 'typeinfo',
       interactive: true
       buffer: buffer
@@ -205,7 +206,9 @@ class GhcModiProcess
         pos = tokens[0].trim().split(' ').map (i) -> i - 1
         type = tokens[1]
         myrange = new Range [pos[0], pos[1]], [pos[2], pos[3]]
+        return acc if myrange.isEmpty()
         return acc unless myrange.containsRange(crange)
+        myrange = Util.tabUnshiftForRange(buffer, myrange)
         return [myrange, type]),
         ''
       range = crange unless range
@@ -291,6 +294,7 @@ class GhcModiProcess
           else
             'error'
         messPos = new Point(row - 1, col - 1)
+        messPos = Util.tabUnshiftForPoint(buffer, messPos)
 
         return {
           uri: (try rootDir.getFile(rootDir.relativize(file)).getPath()) ? file

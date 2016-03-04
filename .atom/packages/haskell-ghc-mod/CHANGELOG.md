@@ -1,5 +1,42 @@
+## 1.9.6
+* Linter support docs
+* Update supported versions
+
+## 1.9.5
+* Handle ghc-mod 4.1.2 version
+
+## 1.9.4
+* Fix an error where tabUnshift would fail
+
+## 1.9.3
+* Create new instance for tab[Un]Shift
+* Improved insert-type
+* Insert inline type signatures
+* Filter empty type ranges out of ghc-mod output
+* Properly insert type into lhs
+* Fix insert-type for operators
+
+## 1.9.2
+* Handling no value in onShouldShowTooltip delegated to ide-haskell
+
+## 1.9.1
+* Fix atom-haskell/ide-haskell#145
+
+## 1.9.0
+* Show type on selection (disabled by default)
+
+## 1.8.0
+* Some black magic to work around tabs
+* Somewhat better linter integration
+* Do away with ::shadow selector
+
+## 1.7.0
+* Output message highlighter
+* Tooltip highlighting
+* Add go-to-declaration to keymap example (pull request #116 from @PetrGlad)
+
 ## 1.6.6
-* Fix #105
+* Fix #106
 
 ## 1.6.5
 * Partial fix for explicit type w/ctors import

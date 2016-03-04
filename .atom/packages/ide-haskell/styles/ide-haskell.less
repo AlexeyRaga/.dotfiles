@@ -4,16 +4,7 @@
 // for a full listing of what's available.
 @import "octicon-utf-codes";
 @import "ui-variables";
-
-.icon() {
-  font-family: 'Octicons Regular';
-  font-weight: normal;
-  font-style: normal;
-  display: inline-block;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  text-decoration: none;
-}
+@import "icon";
 
 @-webkit-keyframes ide-haskell-move {
   0% {
@@ -284,79 +275,44 @@ ide-haskell-panel {
   }
 }
 
-@error-color: #b22222;
-
-atom-text-editor::shadow {
-  .highlight {
-    &.ide-haskell-lint .region {
-      background: linear-gradient(to right, @background-color-info 0%, fadeout(@background-color-info, 50%) 100%);
-    }
-    &.ide-haskell-warning .region {
-      background: linear-gradient(to right, @background-color-warning 0%, fadeout(@background-color-warning, 50%) 100%);
-    }
-    &.ide-haskell-error .region {
-      background: linear-gradient(to right, @background-color-error 0%, fadeout(@background-color-error, 50%) 100%);
-    }
-    &.ide-haskell-type .region {
-      background: fade(@background-color-info, 10%);
-    }
-  }
-
-  .gutter[gutter-name="ide-haskell-check-results"] .decoration {
-    &:before {
-      .icon;
-      font-size:0.8em;
-      width:0.8em;
-      height:0.8em;
-    }
-
-    &.ide-haskell-lint {
-      visibility: visible;
-      &:before {
-        content: @info;
-        color: @text-color-info;
-        z-index: 1;
-      }
-    }
-
-    &.ide-haskell-warning {
-      visibility: visible;
-      &:before {
-        content: @stop;
-        color: @text-color-warning;
-        z-index: 2;
-      }
-    }
-
-    &.ide-haskell-error {
-      visibility: visible;
-      &:before {
-        content: @alert;
-        color: @text-color-error;
-        z-index: 3;
-      }
-    }
-  }
-}
-
 ide-haskell-tooltip {
+  &::before {
+    background:
+      linear-gradient(-45deg, @overlay-border-color 50%, transparent 0) bottom left,
+      linear-gradient(45deg, @overlay-border-color 50%, transparent 0) top right;
+    position: absolute;
+    top: -0.5ch;
+    left: 0;
+    width: 1ch;
+    height: 0.5ch;
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    content: "";
+  }
   div {
-    white-space: pre-wrap;
     text-align: left;
-    color: @text-color-info;
+    // color: @text-color-info;
+    font-size: 85%;
+    display: block;
+    white-space: pre-wrap;
+    background: none !important;
+    word-break: break-all;
+  }
+  div + div {
+    margin-top: 1em;
   }
   display: block;
   background: @overlay-background-color;
   border: solid 2px @overlay-border-color;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: 0 0.5em;
 }
 
 // A hack to catch mouse events only on .scroll-view
-atom-text-editor {
-  &::shadow .scroll-view>.lines, atom-overlay.ide-haskell {
-    pointer-events: none;
-  }
+atom-text-editor atom-overlay.ide-haskell {
+  pointer-events: none;
 }
 
 .platform-win32 {

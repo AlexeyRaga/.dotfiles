@@ -1,7 +1,7 @@
 {
   "name": "git-diff-details",
   "main": "./lib/main",
-  "version": "0.21.0",
+  "version": "0.23.0",
   "description": "View git diffs directly in atom.",
   "keywords": [
     "git",
@@ -30,16 +30,16 @@
     "url": "https://github.com/samu/git-diff-details/issues"
   },
   "homepage": "https://github.com/samu/git-diff-details#readme",
-  "_id": "git-diff-details@0.21.0",
-  "_shasum": "5ac68dde3425afc1d30ed4cc5be23501d1184172",
-  "_resolved": "file:../d-116116-32983-gfsk3f/package.tgz",
-  "_from": "../d-116116-32983-gfsk3f/package.tgz",
+  "_id": "git-diff-details@0.23.0",
+  "_shasum": "ee6ec046683a173c418a3a5e209d901a50b666ef",
+  "_resolved": "file:../d-11622-55577-hlsrwv/package.tgz",
+  "_from": "../d-11622-55577-hlsrwv/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
         "name": "atom-space-pen-views",
-        "version": "2.1.1",
+        "version": "2.2.0",
         "path": "node_modules/atom-space-pen-views/lib/main.js"
       },
       {

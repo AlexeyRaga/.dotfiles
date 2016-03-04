@@ -1,3 +1,27 @@
+## 1.5.2
+* Bind check result markers to editor id
+* Update UPI docs
+
+## 1.5.1
+* onShouldShowTooltip callback can return undef/val
+
+## 1.5.0
+* Update CHANGELOG
+* Show tooltip on selection range
+* Do away with ::shadow selector
+* Typo (pull request #144 from @ggreif)
+
+## 1.4.2
+* Vertical spacing for multi-message tooltips
+* Support array TooltipMessage
+
+## 1.4.1
+* Fix some bugs in MessageObject
+
+## 1.4.0
+* Add more detail to setup instructions (pull request #140 from @Gabriel439)
+* Pretty tooltips
+
 ## 1.3.9
 * Add ide-haskell class to atom-workspace
 * Grammar
@@ -8,7 +32,7 @@
 * update contributors
 
 ## 1.3.7
-* Might be no controller on close-tooplip
+* Might be no controller on close-tooltip
 
 ## 1.3.6
 * Fix tooltip fail reporting

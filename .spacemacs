@@ -26,6 +26,7 @@ values."
      osx
      auto-completion
      better-defaults
+     dockerfile
      emacs-lisp
      diff-hl
      purescript
@@ -37,6 +38,7 @@ values."
      git
      markdown
      scala
+     syntax-checking
      ;; org
      (shell :variables
             shell-default-height 10

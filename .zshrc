@@ -46,16 +46,11 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git cabal brew git-flow sbt scala wd)
+plugins=(git cabal brew git-flow sbt scala wd docker-compose docker stack)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-export GHC_DOT_APP="/Applications/ghc-7.10.2.app"
-if [ -d "$GHC_DOT_APP" ]; then
-  export PATH="${GHC_DOT_APP}/Contents/bin:${PATH}"
-fi
 
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/.rvm/bin"
 export PATH=${HOME}/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH
@@ -63,6 +58,10 @@ export PATH=${HOME}/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export PATH="${HOME}/.cabal/bin:${PATH}"
 
 # export MANPATH="/usr/local/man:$MANPATH"
+
+# export GOROOT=$HOME/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
 setopt AUTO_CD
 
@@ -82,17 +81,8 @@ alias xemacs="open -a /Applications/Emacs.app"
 alias em="open -a /Applications/Emacs.app"
 alias sm="open -a /Applications/Emacs.app"
 alias hstest="fswatch -o ./ | xargs -n 1 -I{} doctest -isrc -Wall -fno-warn-type-defaults "
-alias startvm="VBoxManage startvm $(VBoxManage list vms | grep dev_vagrant_default | sed 's/\"\([^"]*\).*/\1/') --type headless"
-
-c1() {
-  if [[ $# -gt 0 ]]; then
-     dsh -g c1 -c $*
-  else
-     echo "Usage: c1 <command>"
-  fi
-}
-
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+alias crm="docker-compose kill && docker ps -a | tail -n +2 | cut -d ' ' -f 1 | xargs docker rm"
+alias cup="docker-compose up"
 
 #. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 

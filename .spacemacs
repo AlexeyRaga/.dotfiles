@@ -182,7 +182,7 @@ values."
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters the
    ;; point when it reaches the top or bottom of the screen. (default t)
-   dotspacemacs-smooth-scrolling t
+   dotspacemacs-smooth-scrolling nil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -239,6 +239,9 @@ layers configuration. You are free to put any user code."
     ;; (... do more stuff but be careful not to destroy the universe ...)
   )
 )
+
+(setq-default dotspacemacs-configuration-layers '(
+  (scala :variables scala-enable-eldoc t)))
 
 (setq ns-use-srgb-colorspace nil)
 (setq-default dotspacemacs-configuration-layers '(osx))

@@ -52,16 +52,11 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:$HOME/.rvm/bin"
-export PATH=${HOME}/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
-export PATH="${HOME}/.cabal/bin:${PATH}"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# export GOROOT=$HOME/go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+
 
 setopt AUTO_CD
 
@@ -110,10 +105,8 @@ alias cup="docker-compose up"
 
 eval "$(jenv init -)"
 
-test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+export PATH=${HOME}/haskell/ghc-7.10.3/bin:$PATH
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home"
+test -e "${HOME}/.iterm3_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-export NVM_DIR="/Users/alexey/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-test -e ${HOME}/.nix-profile/etc/profile.d/nix.sh && . ${HOME}/.nix-profile/etc/profile.d/nix.sh
-
+export DOCKER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | head -n 1)

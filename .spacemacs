@@ -207,6 +207,7 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
+  (delete-selection-mode 1)
   (add-hook 'hybrid-mode-hook (lambda () (setq evil-default-state 'insert)))
   )
 
@@ -238,6 +239,9 @@ layers configuration. You are free to put any user code."
     (select-window-1)
     ;; (... do more stuff but be careful not to destroy the universe ...)
   )
+
+  (with-eval-after-load 'intero
+    (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
 )
 
 (setq-default dotspacemacs-configuration-layers '(
@@ -262,4 +266,6 @@ layers configuration. You are free to put any user code."
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
  '(shm-current-face ((t (:background "#232528")))))
+
+
 

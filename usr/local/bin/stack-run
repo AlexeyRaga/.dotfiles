@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo stack build --exec "$(less $(basename $PWD).cabal | grep executable | head -n 1 | cut -d' ' -f2) $@"
+

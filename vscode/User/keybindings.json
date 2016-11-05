@@ -1,7 +1,0 @@
-// Place your key bindings in this file to overwrite the defaults
-[
-  { "key": "alt+shift+up",         "command": "editor.action.insertCursorAbove",
-                                      "when": "editorTextFocus" },
-  { "key": "alt+shift+down",       "command": "editor.action.insertCursorBelow",
-                                      "when": "editorTextFocus" }
-]

@@ -110,3 +110,6 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Hom
 test -e "${HOME}/.iterm3_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export DOCKER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | head -n 1)
+
+# Added by GraphLab Create Launcher v3.0.1
+export PATH="/Users/alexey/anaconda/bin:$PATH"

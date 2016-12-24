@@ -26,9 +26,7 @@ values."
      osx
      auto-completion
      better-defaults
-     dockerfile
      emacs-lisp
-     diff-hl
      purescript
      (haskell :variables
               haskell-enable-hindent-style "chris-done"
@@ -104,8 +102,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Fira Code"
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -216,6 +214,11 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
+  (setq global-hl-line-mode nil)
+  (setq scroll-step 1)
+  (setq auto-window-vscroll nil)
+  (setq x-select-enable-clipboard t)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (custom-set-faces
     '(shm-current-face ((t (:background "#232528"))))
   )
@@ -243,6 +246,8 @@ layers configuration. You are free to put any user code."
   (with-eval-after-load 'intero
     (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
 )
+
+(setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans"))
 
 (setq-default dotspacemacs-configuration-layers '(
   (scala :variables scala-enable-eldoc t)))

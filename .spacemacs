@@ -53,7 +53,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages 
+   '(
+    all-the-icons
+    )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -227,11 +230,17 @@ layers configuration. You are free to put any user code."
 
   (global-set-key (kbd "s-;") 'comment-or-uncomment-region)
   (global-set-key (kbd "<f12>") 'bs-cycle-next)
-  
+
   (global-set-key (kbd "<s-up>") 'shrink-window)
   (global-set-key (kbd "<s-down>") 'enlarge-window)
   (global-set-key (kbd "<s-left>") 'shrink-window-horizontally)
   (global-set-key (kbd "<s-right>") 'enlarge-window-horizontally)
+
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  ;(setq neo-vc-integration (quote (face)))
+  (setq neo-enable-file-icons t)
+  (remove-hook 'helm-mode-hook 'mode-icons-mode)
+  (remove-hook 'helm-minibuffer-set-up-hook 'mode-icons-mode)
 
   (spacemacs|define-custom-layout "haskell"
     :binding "h"
@@ -262,6 +271,7 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(paradox-github-token t)
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -271,6 +281,3 @@ layers configuration. You are free to put any user code."
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
  '(shm-current-face ((t (:background "#232528")))))
-
-
-

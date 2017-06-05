@@ -46,7 +46,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git cabal brew git-flow sbt scala wd docker-compose docker stack)
+plugins=(git cabal brew git-flow sbt scala wd docker-compose docker stack z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -110,3 +110,5 @@ test -e "${HOME}/.iterm3_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 export DOCKER_IP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1' | head -n 1)
 
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"

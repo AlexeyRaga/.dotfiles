@@ -24,6 +24,7 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      osx
+     atom-one-dark-theme
      auto-completion
      better-defaults
      emacs-lisp
@@ -53,12 +54,12 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages 
+   dotspacemacs-additional-packages
    '(
     all-the-icons
     )
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(vi-tilde-fringe)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -106,7 +107,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Fira Code"
-                               :size 12
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -216,7 +217,8 @@ user code."
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-
+  (mac-auto-operator-composition-mode)
+  (setq projectile-switch-project-action 'neotree-projectile-action)
   (setq global-hl-line-mode nil)
   (setq scroll-step 1)
   (setq auto-window-vscroll nil)
@@ -230,6 +232,9 @@ layers configuration. You are free to put any user code."
 
   (global-set-key (kbd "s-;") 'comment-or-uncomment-region)
   (global-set-key (kbd "<f12>") 'bs-cycle-next)
+
+  (global-set-key (kbd "<M-up>") 'move-text-line-up)
+  (global-set-key (kbd "<M-down>") 'move-text-line-down)
 
   (global-set-key (kbd "<s-up>") 'shrink-window)
   (global-set-key (kbd "<s-down>") 'enlarge-window)
@@ -252,6 +257,8 @@ layers configuration. You are free to put any user code."
     ;; (... do more stuff but be careful not to destroy the universe ...)
   )
 
+  (global-evil-mc-mode)
+
   (with-eval-after-load 'intero
     (flycheck-add-next-checker 'intero '(warning . haskell-hlint)))
 )
@@ -271,13 +278,31 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "08b8807d23c290c840bbb14614a83878529359eaba1805618b3be7d61b0b0a32" default)))
+ '(evil-want-Y-yank-to-eol t)
+ '(haskell-interactive-popup-errors nil)
+ '(haskell-notify-p t)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(line-spacing 0.25)
+ '(package-selected-packages
+   (quote
+    (atom-one-dark-theme memoize winum unfill fuzzy yaml-mode xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org terraform-mode hcl-mode spaceline powerline smeargle shell-pop reveal-in-osx-finder restart-emacs rainbow-delimiters psci purescript-mode psc-ide dash-functional popwin persp-mode pcre2el pbcopy paradox spinner osx-trash osx-dictionary orgit org org-plus-contrib org-bullets open-junk-file noflet neotree mwim multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum linum-relative link-hint launchctl intero info+ indent-guide ido-vertical-mode hydra hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile helm-hoogle helm-gitignore request helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flycheck-pos-tip pos-tip flycheck-haskell flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help ensime sbt-mode scala-mode elisp-slime-nav dumb-jump f s diminish diff-hl company-statistics company-ghci company-ghc ghc haskell-mode company-cabal company column-enforce-mode cmm-mode clean-aindent-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed all-the-icons font-lock+ dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup quelpa package-build spacemacs-theme)))
  '(paradox-github-token t)
+ '(psc-ide-add-import-on-completion t t)
+ '(psc-ide-rebuild-on-save nil t)
  '(send-mail-function (quote smtpmail-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ '(haskell-constructor-face ((t (:inherit font-lock-type-face :weight normal))))
+ '(haskell-definition-face ((t (:inherit font-lock-function-name-face :weight normal))))
+ '(haskell-operator-face ((t (:inherit font-lock-variable-name-face :weight normal))))
+ '(haskell-type-face ((t (:inherit font-lock-type-face :weight normal))))
+ '(neo-dir-link-face ((t (:inherit ## :foreground "#4f97d7"))))
+ '(neo-root-dir-face ((t (:inherit ## :foreground "#bc6ec5"))))
  '(shm-current-face ((t (:background "#232528")))))

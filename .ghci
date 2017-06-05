@@ -1,2 +1,9 @@
 :set +c
 :set prompt "λ: "
+:set prompt2 " | "
+:set -XBangPatterns
+:set -XOverloadedStrings
+:set -XScopedTypeVariables
+:set +s
+:set +t
+
